@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-1664" y="-14"/>
         </scene>
-        <!--View Controller-->
+        <!--Record Sounds View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RecordSoundsViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,6 +42,9 @@
                                 <buttonConfiguration key="configuration" style="plain">
                                     <backgroundConfiguration key="background" image="Record"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="onTapRecordButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gbh-2K-y7K"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="71l-vy-n3e">
                                 <rect key="frame" x="161.66666666666666" y="601" width="70" height="70"/>
@@ -54,7 +57,7 @@
                                     <backgroundConfiguration key="background" image="Stop"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="Snk-EK-wH4" kind="show" id="Vv9-eC-hTj"/>
+                                    <action selector="onTapStopButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2y0-Gv-Pla"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yUB-ac-LFP">
@@ -76,6 +79,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wyi-kG-iHT"/>
+                    <connections>
+                        <outlet property="recordButton" destination="HEn-re-eHG" id="FYb-3j-JW0"/>
+                        <outlet property="recordingLabel" destination="yUB-ac-LFP" id="mG7-AC-98R"/>
+                        <outlet property="stopRecordingButton" destination="71l-vy-n3e" id="gBJ-4C-vpQ"/>
+                        <segue destination="Snk-EK-wH4" kind="show" identifier="stopRecording" id="bRa-sG-DGh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,11 +108,17 @@
                                                 <rect key="frame" x="0.0" y="30.666666666666657" width="196.66666666666666" height="104"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="Slow"/>
+                                                <connections>
+                                                    <action selector="onTapSlowButton:" destination="Snk-EK-wH4" eventType="touchUpInside" id="7oP-Tb-1aK"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZY-JI-QMU">
                                                 <rect key="frame" x="196.66666666666663" y="30.666666666666657" width="196.33333333333337" height="104"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="Fast"/>
+                                                <connections>
+                                                    <action selector="onTapFastButton:" destination="Snk-EK-wH4" eventType="touchUpInside" id="bxX-mv-KLr"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -117,11 +132,17 @@
                                                 <rect key="frame" x="0.0" y="30.666666666666686" width="196.66666666666666" height="104"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="HighPitch"/>
+                                                <connections>
+                                                    <action selector="onTapHighPitchButton:" destination="Snk-EK-wH4" eventType="touchUpInside" id="T5v-tQ-RsS"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFL-9K-eTD">
                                                 <rect key="frame" x="196.66666666666663" y="30.666666666666686" width="196.33333333333337" height="104"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="LowPitch"/>
+                                                <connections>
+                                                    <action selector="onTapLowPitchButton:" destination="Snk-EK-wH4" eventType="touchUpInside" id="Szo-DV-94X"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -135,11 +156,17 @@
                                                 <rect key="frame" x="0.0" y="30.666666666666629" width="196.66666666666666" height="104"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="Echo"/>
+                                                <connections>
+                                                    <action selector="onTapEchoButton:" destination="Snk-EK-wH4" eventType="touchUpInside" id="qSS-yT-4lC"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="01o-gu-UNd">
                                                 <rect key="frame" x="196.66666666666663" y="30.666666666666629" width="196.33333333333337" height="104"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="Reverb"/>
+                                                <connections>
+                                                    <action selector="onTapReverbButton:" destination="Snk-EK-wH4" eventType="touchUpInside" id="jso-ja-PrF"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -163,6 +190,9 @@
                                 <buttonConfiguration key="configuration" style="plain">
                                     <backgroundConfiguration key="background" image="Stop"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="onTapStopButton:" destination="Snk-EK-wH4" eventType="touchUpInside" id="e7l-F5-3GR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nvZ-Hj-Mtv"/>
