@@ -8,80 +8,92 @@
 import UIKit
 import AVFoundation
 
-enum PlayType {
-    case slow
-    case fast
-    case highPitch
-    case lowPitch
-    case echo
-    case reverb
-    case normal
-}
-
-enum PlayingState {
-    case playing
-    case notPlaying
-}
-
 internal final class PlaySoundsViewController: UIViewController {
+
+    // MARK: @IBOutlet
+
+    @IBOutlet weak private var slowButton: UIButton!
+    @IBOutlet weak private var fastButton: UIButton!
+    @IBOutlet weak private var hightPitchButton: UIButton!
+    @IBOutlet weak private var lowPitchButton: UIButton!
+    @IBOutlet weak private var echoButton: UIButton!
+    @IBOutlet weak private var reverbButton: UIButton!
+    @IBOutlet weak private var stopButton: UIButton!
+
     // MARK: Properties
 
-    private var playType: PlayType = .normal
     var audioUrl: URL!
     var audioFile: AVAudioFile!
     var audioEngine: AVAudioEngine!
     var audioPlayNode: AVAudioPlayerNode!
     var stopTimer: Timer!
 
-    private var isPlaying: Bool = false
+    private var isPlaying: Bool = false {
+        didSet {
+            slowButton.isEnabled = !isPlaying
+            fastButton.isEnabled = !isPlaying
+            lowPitchButton.isEnabled = !isPlaying
+            hightPitchButton.isEnabled = !isPlaying
+            echoButton.isEnabled = !isPlaying
+            reverbButton.isEnabled = !isPlaying
+            stopButton.isEnabled = isPlaying
+        }
+    }
 
     // MARK: Life cycle
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAudio()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopAudio()
+    }
+
     // MARK: IBAction
 
     @IBAction private func onTapSlowButton(_ sender: Any) {
-        print(#function)
         playSound(rate: 0.5)
     }
 
     @IBAction private func onTapFastButton(_ sender: Any) {
-        print(#function)
         playSound(rate: 1.5)
     }
 
     @IBAction private func onTapHighPitchButton(_ sender: Any) {
-        print(#function)
         playSound(pitch: 1000)
     }
 
     @IBAction private func onTapLowPitchButton(_ sender: Any) {
-        print(#function)
         playSound(pitch: -1000)
     }
 
     @IBAction private func onTapEchoButton(_ sender: Any) {
-        print(#function)
         playSound(echo: true)
     }
 
     @IBAction private func onTapReverbButton(_ sender: Any) {
-        print(#function)
         playSound(reverb: true)
     }
 
     @IBAction private func onTapStopButton(_ sender: Any) {
-        print(#function)
         stopAudio()
+    }
+
+    private func setupAudio() {
+        do {
+            audioFile = try AVAudioFile(forReading: audioUrl as URL)
+        } catch {
+            print(error)
+        }
     }
 
     @objc
     func stopAudio() {
+        isPlaying = false
+
         if let audioPlayNode = audioPlayNode {
             audioPlayNode.stop()
         }
@@ -99,22 +111,10 @@ internal final class PlaySoundsViewController: UIViewController {
 
 extension PlaySoundsViewController {
 
-    private func setupAudio() {
-        do {
-            audioFile = try AVAudioFile(forReading: audioUrl as URL)
-        } catch {
-            print(error)
-        }
-    }
-
     private func connectAudioNodes(_ nodes: AVAudioNode...) {
         for x in 0..<nodes.count-1 {
             audioEngine.connect(nodes[x], to: nodes[x+1], format: audioFile.processingFormat)
         }
-    }
-
-    private func configureUI(_ playState: Bool) {
-        print(isPlaying)
     }
 
     private func playSound(
@@ -186,5 +186,6 @@ extension PlaySoundsViewController {
         }
 
         audioPlayNode.play()
+        isPlaying = true
     }
 }

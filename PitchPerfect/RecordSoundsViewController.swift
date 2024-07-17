@@ -47,7 +47,6 @@ internal final class RecordSoundsViewController: UIViewController {
 
     @IBAction private func onTapRecordButton(_ sender: Any) {
         isRecoding = true
-        print(#function)
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,.userDomainMask, true)[0] as String
         let recordingName = "recordedVoice.wav"
         let pathArray = [dirPath, recordingName]
@@ -69,7 +68,6 @@ internal final class RecordSoundsViewController: UIViewController {
 
     @IBAction private func onTapStopButton(_ sender: Any) {
         isRecoding = false
-        print(#function)
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
@@ -77,10 +75,11 @@ internal final class RecordSoundsViewController: UIViewController {
     
 }
 
+// MARK: - Audio Recorder Delegate
+
 extension RecordSoundsViewController: AVAudioRecorderDelegate {
 
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        print(#function)
         if flag {
             performSegue(withIdentifier: openPlayScreenSegue, sender: audioRecorder.url)
         } else {

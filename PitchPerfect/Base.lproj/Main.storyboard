@@ -207,6 +207,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uCY-Bs-eZq"/>
+                    <connections>
+                        <outlet property="echoButton" destination="UNi-Fb-I03" id="HKI-JK-M2W"/>
+                        <outlet property="fastButton" destination="DZY-JI-QMU" id="AvD-Yg-rKX"/>
+                        <outlet property="hightPitchButton" destination="h7q-Q7-Ha1" id="gW9-rW-xHM"/>
+                        <outlet property="lowPitchButton" destination="IFL-9K-eTD" id="RAD-yh-yYm"/>
+                        <outlet property="reverbButton" destination="01o-gu-UNd" id="REd-vj-xUR"/>
+                        <outlet property="slowButton" destination="Gw0-0a-zcl" id="WOh-97-7ew"/>
+                        <outlet property="stopButton" destination="MD5-K9-2lx" id="u07-ol-Msh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gEG-zd-0PI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
